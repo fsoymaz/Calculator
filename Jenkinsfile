@@ -5,13 +5,13 @@ pipeline {
         CREDENTIALS_ID = '31'
         GITHUB_REPO_TEST = 'git@github.com:fsoymaz/CalculatorTest.git'
         NUGET_FEED = "${WORKSPACE}/nuget_packages"
+        DOTNET_PATH = '/opt/homebrew/bin/dotnet'
     }
     
     stages {
         stage('📥 Checkout Calculator Backend') {
             steps {
                 echo 'Calculator Backend repository klone ediliyor...'
-                echo "Branch: ${BRANCH_NAME ?: 'local'}"
                 checkout scm
             }
         }
@@ -22,7 +22,7 @@ pipeline {
                 sh '''
                     mkdir -p ${NUGET_FEED}
                     cd ${WORKSPACE}/CalculatorLib
-                    dotnet pack -c Release -o ${NUGET_FEED}
+                    ${DOTNET_PATH} pack -c Release -o ${NUGET_FEED}
                     echo "Package oluşturuldu:"
                     ls -la ${NUGET_FEED}
                 '''
@@ -45,8 +45,8 @@ pipeline {
                 echo 'NuGet feed ekleniyor ve dependencies yükleniyor...'
                 sh '''
                     cd ${WORKSPACE}/CalculatorTest/CalculatorTests
-                    dotnet nuget add source ${NUGET_FEED} --name jenkins-nuget || true
-                    dotnet restore
+                    ${DOTNET_PATH} nuget add source ${NUGET_FEED} --name jenkins-nuget || true
+                    ${DOTNET_PATH} restore
                 '''
             }
         }
@@ -56,7 +56,7 @@ pipeline {
                 echo 'Unit testler çalıştırılıyor...'
                 sh '''
                     cd ${WORKSPACE}/CalculatorTest/CalculatorTests
-                    dotnet test --no-restore --verbosity normal
+                    ${DOTNET_PATH} test --no-restore --verbosity normal
                 '''
             }
         }
@@ -68,7 +68,7 @@ pipeline {
                     try {
                         sh '''
                             cd ${WORKSPACE}/CalculatorTest/CalculatorTests
-                            dotnet test --no-restore
+                            ${DOTNET_PATH} test --no-restore
                         '''
                         echo '✅ TÜM TESTLER BAŞARILI!'
                         env.TEST_PASSED = 'true'
