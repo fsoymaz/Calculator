@@ -4,7 +4,6 @@ pipeline {
     environment {
         CREDENTIALS_ID = '31'
         GITHUB_REPO_TEST = 'git@github.com:fsoymaz/CalculatorTest.git'
-        NUGET_FEED = "${WORKSPACE}/nuget_packages"
         DOTNET_PATH = '/opt/homebrew/bin/dotnet'
     }
     
@@ -16,20 +15,7 @@ pipeline {
             }
         }
         
-        stage('🔨 Build NuGet Package') {
-            steps {
-                echo 'CalculatorLib NuGet package oluşturuluyor...'
-                sh '''
-                    mkdir -p ${NUGET_FEED}
-                    cd ${WORKSPACE}/CalculatorLib
-                    ${DOTNET_PATH} pack -c Release -o ${NUGET_FEED}
-                    echo "Package oluşturuldu:"
-                    ls -la ${NUGET_FEED}
-                '''
-            }
-        }
-        
-        stage('📦 Clone CalculatorTest') {
+        stage(' Clone CalculatorTest') {
             steps {
                 echo 'CalculatorTest repository klone ediliyor...'
                 sh '''
@@ -42,10 +28,9 @@ pipeline {
         
         stage('📋 Setup Dependencies') {
             steps {
-                echo 'NuGet feed ekleniyor ve dependencies yükleniyor...'
+                echo 'Dependencies restore ediliyor...'
                 sh '''
                     cd ${WORKSPACE}/CalculatorTest/CalculatorTests
-                    ${DOTNET_PATH} nuget add source ${NUGET_FEED} --name jenkins-nuget || true
                     ${DOTNET_PATH} restore
                 '''
             }
