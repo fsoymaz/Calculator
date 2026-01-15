@@ -11,6 +11,7 @@ pipeline {
         stage('📥 Checkout Calculator Backend') {
             steps {
                 echo 'Calculator Backend repository klone ediliyor...'
+                echo "Branch: ${BRANCH_NAME ?: 'local'}"
                 checkout scm
             }
         }
@@ -81,13 +82,30 @@ pipeline {
             }
         }
         
-        stage('✅ Build Success - Push Accepted') {
+        stage('✅ Build Success - PR Approvable') {
             when {
-                expression { env.TEST_PASSED == 'true' }
+                allOf {
+                    expression { env.TEST_PASSED == 'true' }
+                    branch 'PR-*'  // Pull Request branch'lerinde
+                }
             }
             steps {
-                echo '✅ TÜM TESTLER BAŞARILI - Push kabul edildi!'
-                echo 'Calculator repo\'ya push atabilirsin'
+                echo '✅ TÜM TESTLER BAŞARILI!'
+                echo '✅ Bu Pull Request merge edilebilir (main\'e)'
+                echo '✅ GitHub PR status: APPROVED'
+            }
+        }
+        
+        stage('✅ Direct Main Push - Success') {
+            when {
+                allOf {
+                    expression { env.TEST_PASSED == 'true' }
+                    branch 'main'  // Doğrudan main'e push
+                }
+            }
+            steps {
+                echo '✅ Main branch üzerinde testler başarılı'
+                echo '✅ Production deploy hazır'
             }
         }
     }
