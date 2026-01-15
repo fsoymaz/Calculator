@@ -1,0 +1,12 @@
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/bin/Release/net9.0/CalculatorLib.deps.json
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/bin/Release/net9.0/CalculatorLib.dll
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/bin/Release/net9.0/CalculatorLib.pdb
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.GeneratedMSBuildEditorConfig.editorconfig
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.AssemblyInfoInputs.cache
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.AssemblyInfo.cs
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.csproj.CoreCompileInputs.cache
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.sourcelink.json
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.dll
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/refint/CalculatorLib.dll
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/CalculatorLib.pdb
+/Users/fatihsoymaz/Desktop/Calculator_Lib/CalculatorLib/obj/Release/net9.0/ref/CalculatorLib.dll
