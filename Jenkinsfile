@@ -8,6 +8,18 @@ pipeline {
     }
     
     stages {
+        stage('🧹 Clean Workspace') {
+            steps {
+                echo 'Workspace temizleniyor...'
+                sh '''
+                    rm -rf ${WORKSPACE}/Calculator_Lib/CalculatorLib/bin
+                    rm -rf ${WORKSPACE}/Calculator_Lib/CalculatorLib/obj
+                    rm -rf ${WORKSPACE}/CalculatorTest/CalculatorTests/bin
+                    rm -rf ${WORKSPACE}/CalculatorTest/CalculatorTests/obj
+                '''
+            }
+        }
+
         stage('📥 Checkout Calculator Backend') {
             steps {
                 echo 'Calculator Backend repository klone ediliyor...'
